@@ -70,7 +70,7 @@ def listVideos(url):
 def listShows():
     xbmcplugin.addSortMethod(pluginhandle, xbmcplugin.SORT_METHOD_LABEL)
     content = opener.open(urlMain+"/tiviVideos/navigation?view=flashXml").read()
-    match = re.compile('<ns2:node id=".+?" label="(.+?)".+?image="(.+?)" type="broadcast">(.+?)</ns2:node>', re.DOTALL).findall(content)
+    match = re.compile('<ns2:node.+?id=".+?".+?label="(.+?)".+?image="(.+?)".+?type="broadcast">(.+?)</ns2:node>', re.DOTALL).findall(content)
     for title, thumb, url in match:
         thumb = urlMain+thumb[:thumb.rfind('/')]
         addDir(title, urlMain+url, 'listVideos', thumb)
