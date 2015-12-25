@@ -5,7 +5,6 @@ import urllib2
 import socket
 import sys
 import re
-import os
 import xbmcplugin
 import xbmcgui
 import xbmcaddon
@@ -24,7 +23,9 @@ icon = xbmc.translatePath('special://home/addons/'+addonID+'/icon.png')
 urlMain = "http://www.tivi.de"
 opener = urllib2.build_opener()
 opener.addheaders = [('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; rv:25.0) Gecko/20100101 Firefox/25.0')]
-
+minLength = addon.getSetting("minLength")
+mins = [0, 5, 10, 20, 30]
+minLength = mins[int(minLength)]
 
 def index():
     addDir(translation(30001), urlMain+"/tiviVideos/rueckblick?view=flashXml", 'listVideos', icon)
@@ -61,7 +62,8 @@ def listVideos(url):
         thumb = urlMain+match[0]
         thumb = thumb[:thumb.rfind('/')].replace('tiviTeaserbild', 'tivi9teaserbild')
         if "7-Tage-R%C3%BCckblick" not in url:
-            addLink(title, url, 'playVideo', thumb, desc, duration)
+            if int(duration) >= int(minLength):
+                addLink(title, url, 'playVideo', thumb, desc, duration)
     xbmcplugin.endOfDirectory(pluginhandle)
     if forceViewMode:
         xbmc.executebuiltin('Container.SetViewMode('+viewMode+')')

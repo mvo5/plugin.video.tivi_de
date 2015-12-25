@@ -6,5 +6,6 @@
   <string id="30004">Add to queue</string>
   <string id="30101">Use thumb as fanart</string>
   <string id="30102">Force View</string>
-  <string id="30103">ViewID</string>
+  <string id="30103">Minimum video length in minutes</string>
+  <string id="30104">ViewID</string>
 </strings>
